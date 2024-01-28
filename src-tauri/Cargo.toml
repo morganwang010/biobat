@@ -15,11 +15,19 @@ rust-version = "1.60"
 tauri-build = { version = "1.5.1", features = [] }
 
 [dependencies]
+tokio = { version = "1", features = ["full"] }
+log= { version = "^0.4" }
+reqwest = { version = "0.11", features = ["json", "socks"] }
+actix-web = "4.4.0"
+actix-cors = "*"
+dotenv = "0.15.0"
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.5.4", features = [] }
 diesel = { version = "2.0.2", features = ["sqlite", "chrono", "uuid", "returning_clauses_for_sqlite_3_35", "serde_json"] }
 rusqlite = { version = "0.30.0", features = ["bundled"] }
+libsqlite3-sys = { version = "^0", features = ["bundled"] }
+
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.

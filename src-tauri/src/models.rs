@@ -1,10 +1,12 @@
 use super::schema::{ba, com, element};
 use diesel::sql_types::*;
 use serde::Serialize;
+use diesel::Queryable;
+use diesel::QueryableByName;
 
 #[derive(Debug, Clone, Queryable, Serialize, QueryableByName)]
-pub struct ba {
-  #[diesel(sql_type = Integer)]
+pub struct Ba {
+  #[diesel(sql_type = i32)]
   pub id: i32,
 
   #[diesel(sql_type = Text)]
@@ -38,7 +40,7 @@ pub struct ba {
 
 
 #[derive(Debug, Queryable, Serialize, QueryableByName)]
-pub struct Ba {
+pub struct Com {
   #[diesel(sql_type = Integer)]
   pub id: i32,
   #[diesel(sql_type = Text)]
@@ -60,6 +62,32 @@ pub struct Ba {
   #[diesel(sql_type = Text)]
   pub sdate: String,
 }
+
+
+#[derive(Debug, Queryable, Serialize, QueryableByName)]
+pub struct Element {
+  #[diesel(sql_type = Integer)]
+  pub id: i32,
+  #[diesel(sql_type = Text)]
+  pub number: String,
+  #[diesel(sql_type = Text)]
+  pub code: String,
+  #[diesel(sql_type = Text)]
+  pub nameen: String,
+  #[diesel(sql_type = Text)]
+  pub namecn: String,
+  #[diesel(sql_type = Text)]
+  pub source: String,
+  #[diesel(sql_type = Text)]
+  pub place: String,
+  #[diesel(sql_type = Text)]
+  pub org: String,
+  #[diesel(sql_type = Text)]
+  pub research: String,
+  #[diesel(sql_type = Text)]
+  pub sdate: String,
+}
+
 // #[derive(Debug, Clone, Serialize, Insertable)]
 // #[diesel(table_name = feeds)]
 // pub struct NewFeed {

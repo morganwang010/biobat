@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
-
-
-// const count = ref(0)
+import { useRoute } from 'vue-router'
  
+const { params } = useRoute()
+const id = params.id
+console.log(id)
+
   const value = ref<string>('');
   
   const onSearch = (searchValue: string) => {
@@ -31,29 +32,29 @@ import { ref } from 'vue'
       title: '菌株中文名称',
       dataIndex: 'namecn',
     },
-    // {
-    //   title: '菌株来源描述',
-    //   dataIndex: 'source',
-    // },
-    // {
-    //   title: '采集地点',
-    //   dataIndex: 'place',
-    // },
-    // {
-    //   title: '保存单位',
-    //   dataIndex: 'org',
-    // },
-    // {
-    //   title: '保存人',
-    //   dataIndex: 'research',
-    // },
-    // {
-    //   title: '登记日期',
-    //   dataIndex: 'sdate',
-    // },
+    {
+      title: '菌株来源描述',
+      dataIndex: 'source',
+    },
+    {
+      title: '采集地点',
+      dataIndex: 'place',
+    },
+    {
+      title: '保存单位',
+      dataIndex: 'org',
+    },
+    {
+      title: '保存人',
+      dataIndex: 'research',
+    },
+    {
+      title: '登记日期',
+      dataIndex: 'sdate',
+    },
   ];
-    const data = ref([])
-    axios.get("http://localhost:4000").then(res => {
+  const data = ref([])
+axios.get("http://localhost:4000/search/"+id+"").then(res => {
         // const data = res
         console.log("fffffffffff")
         console.log(res.data)
@@ -72,11 +73,12 @@ import { ref } from 'vue'
     <span class="nav"> 首页 > 数据库-2018YFA0901903-菌种库</span>
 
   </div>
+
   <a-space direction="vertical" style="width: 100%;">
     
     <a-input-search
       v-model:value="value"
-      placeholder="请输入统一菌株编号"
+      placeholder="input search text"
       enter-button="Search"
       size="large"
       @search="onSearch"
@@ -85,11 +87,11 @@ import { ref } from 'vue'
   </a-space>
 </div>
 
-  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell"  scroll={ y: true, x: true }>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex === 'number'">
- <a :href="'/detail/'+record.id">{{ record.number }}</a>
-        </template>
+  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell">
+      <template >
+        <!-- <template v-if="column.dataIndex === 'number'">
+ <a :href="'/detail/'+record.number">{{ record.number }}</a>
+        </template> -->
       </template>
       <!-- <template #title>Header</template>
       <template #footer>Footer</template> -->
@@ -125,9 +127,8 @@ th.column-money,
   white-space: nowrap
 }
 .searchbox{
-  margin: auto;
   margin-bottom: 20px;
-  width:100%;
+  width: 100%;
 }
 
 </style>
