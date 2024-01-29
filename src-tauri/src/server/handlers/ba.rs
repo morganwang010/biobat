@@ -1,18 +1,19 @@
 use actix_web::{get, post, web, Responder, Result};
+use diesel::sql_types::Integer;
 use serde::{Deserialize, Serialize};
 
 use crate::info;
 
 
 #[get("/api/ba/{id}")]
-pub async fn handle_get_ba_with_id(id: web::Path<String>) -> Result<impl Responder> {
-  let res = info::ba::get_ba_with_id(id.parse::<i32>().unwrap());
+pub async fn handle_get_ba_with_id(id : web::Path<String>) -> Result<impl Responder> {
+  let res = info::ba::Ba::get_ba_with_id(id.to_string());
 
   Ok(web::Json(res))
 }
 
 #[get("/api/ba")]
-pub async fn handle_articles(
+pub async fn handle_get_ba(
   query: web::Query<info::ba::BaFilter>,
 ) -> Result<impl Responder> {
   let filter = info::ba::BaFilter {
@@ -20,7 +21,7 @@ pub async fn handle_articles(
     limit: query.limit.clone(),
   };
 
-  let res = info::ba::get_ba(filter);
+  let res = info::ba::Ba::get_ba(filter);
 
   Ok(web::Json(res))
 }
@@ -34,6 +35,13 @@ pub struct ReadParam {
 pub struct StarParam {
   starred: i32,
 }
+
+pub fn config(cfg: &mut web::ServiceConfig) {
+    cfg
+      .service(handle_get_ba_with_id)
+      .service(handle_get_ba)
+      ;
+  }
 
 // #[post("/api/articles/{uuid}/read")]
 // pub async fn handle_update_article_read_status(uuid: web::Path<String>, body: web::Json<ReadParam>) -> Result<impl Responder> {

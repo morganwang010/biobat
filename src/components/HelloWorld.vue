@@ -53,7 +53,7 @@ import { ref } from 'vue'
     // },
   ];
     const data = ref([])
-    axios.get("http://localhost:4000").then(res => {
+    axios.get("http://localhost:1105/api/ba").then(res => {
         // const data = res
         console.log("fffffffffff")
         console.log(res.data)

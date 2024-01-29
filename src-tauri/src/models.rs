@@ -6,7 +6,7 @@ use diesel::QueryableByName;
 
 #[derive(Debug, Clone, Queryable, Serialize, QueryableByName)]
 pub struct Ba {
-  #[diesel(sql_type = i32)]
+  #[diesel(sql_type = Integer)]
   pub id: i32,
 
   #[diesel(sql_type = Text)]
