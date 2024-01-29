@@ -57,8 +57,8 @@ console.log(id)
 axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
         // const data = res
         console.log("fffffffffff")
-        console.log(res.data)
-        data.value = (res.data)
+        console.log(res.data.array)
+        data.value = (res.data.array)
       });
  
 
