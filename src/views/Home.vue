@@ -18,12 +18,12 @@ const data = [
     "total": "1200"
 },
 {
-    "link":"/block",
+    "link":"/ele",
     "name":"2018YFA0901903-元件库",
     "total": "1320"
 },
 {
-    "link":"/bacteria",
+    "link":"/com",
     "name":"2018YFA0901903-化合物库",
     "total": "68"
 }

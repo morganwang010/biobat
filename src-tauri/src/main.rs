@@ -1,8 +1,17 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 #[macro_use]
 extern crate diesel;
+extern crate diesel_migrations;
+use dotenv::dotenv;
+
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
+use log::LevelFilter;
+use tauri::{GlobalWindowEvent, Manager, WindowEvent, Wry};
+use tauri_plugin_log::{fern, LogTarget};
 use tokio;
+
 mod cmd;
 mod db;
 mod info;
@@ -11,7 +20,7 @@ mod schema;
 mod server;
 use std::env;
 
-use tauri::{GlobalWindowEvent, Manager, WindowEvent, Wry};
+// pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
 
 fn handle_window_event(event: GlobalWindowEvent<Wry>) {
     let window = event.window();
@@ -30,13 +39,33 @@ fn handle_window_event(event: GlobalWindowEvent<Wry>) {
 
 #[tokio::main]
 async fn main() {
+    dotenv().ok();
+
+    let _env = env::var("BIOINFO_ENV");
+
     let context = tauri::generate_context!();
 
     let mut connection = db::establish_connection();
+
+    // connection
+    // .run_pending_migrations(MIGRATIONS)
+    // .expect("Error migrating");
+
     let window = tauri::Builder::default();
 
     window
         .on_window_event(handle_window_event)
+        .plugin(
+            tauri_plugin_log::Builder::default()
+              .targets([LogTarget::LogDir, LogTarget::Stdout])
+              .with_colors(fern::colors::ColoredLevelConfig::default())
+              .level(
+                env::var("BIOINFO_ENV")
+                  .map(|_env| LevelFilter::Debug)
+                  .unwrap_or(LevelFilter::Info),
+              )
+              .build(),
+          )
         .setup(|app| {
             let app_handle = app.handle();
 

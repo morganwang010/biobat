@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router"
-import Detail from '../views/Detail.vue'
+import BaDetail from '../views/BaDetail.vue'
 import Home from '../views/Home.vue'
-import HelloWorld from '../components/HelloWorld.vue'
+import BaList from '../components/BaList.vue'
 // import Bainfo from '../views/Bainfo.vue'
 
 const router = createRouter({
@@ -13,13 +13,31 @@ const router = createRouter({
 
     },
     {
-        path: "/detail/:id",
-        component: Detail
+        path: "/badetail/:id",
+        component: BaDetail
         
     },
     {
         path: "/bacteria",
-        component: HelloWorld
+        component: BaList
+    },
+    {
+        path: "/com/:id",
+        component: BaDetail
+        
+    },
+    {
+        path: "/com",
+        component: BaList
+    },
+    {
+        path: "/ele/:id",
+        component: BaDetail
+        
+    },
+    {
+        path: "/ele",
+        component: BaList
     },
 ]
 })
