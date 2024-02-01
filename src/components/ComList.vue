@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import axios from "axios"
 
 
 // const count = ref(0)
@@ -12,25 +12,105 @@ import { ref } from 'vue'
     console.log('or use this.value', value.value);
   };
  
-  import axios from "axios"
+
     const columns = [
     {
-      title: '统一菌株编号',
+      title: '编号',
       dataIndex: 'number',
     },
     {
-      title: '原始代号',
+      title: '化合物代号',
       className: 'column-money',
       dataIndex: 'code',
     },
     {
-      title: '菌株英文名称',
+      title: '来源',
       dataIndex: 'nameen',
     },
     {
-      title: '菌株中文名称',
+      title: '结构类型',
       dataIndex: 'namecn',
     },
+    {
+      title: '分子量',
+      dataIndex: 'namecn',
+    },
+    {
+      title: '分子式',
+      dataIndex: 'namecn',
+    },
+    {
+      title: '生物活性信息',
+      dataIndex: 'namecn',
+    },
+    {
+      title: '已知/新',
+      dataIndex: 'namecn',
+    },
+    {
+      title: '化合物鉴定',
+      children: [
+              {
+                title: '1H',
+                dataIndex: 'oneh',
+                key: 'building',
+              },
+              {
+                title: '13C',
+                dataIndex: 'cc',
+                
+              },
+              {
+                title: 'HSQC',
+                dataIndex: 'hsqc',
+                
+              },
+              {
+                title: 'HMBC',
+                dataIndex: 'hmbc',
+                
+              },
+              {
+                title: 'COSY ',
+                dataIndex: 'cosy',
+                
+              },
+              {
+                title: 'HR-MS',
+                dataIndex: 'hrms',
+                
+              },
+              {
+                title: 'IR',
+                dataIndex: 'ir',
+                
+              },
+              {
+                title: 'UV',
+                dataIndex: 'uv',
+                
+              },
+              {
+                title: 'X-ray',
+                dataIndex: 'xray',
+                
+              },
+            ],
+    },
+    {
+      title: '备注',
+      dataIndex: 'note',
+    },
+    {
+      title: '所属课题组负责人及所在单位',
+      dataIndex: 'charger',
+    },
+    {
+      title: '入库日期',
+      dataIndex: 'sdate',
+    },
+
+
     // {
     //   title: '菌株来源描述',
     //   dataIndex: 'source',
@@ -64,19 +144,16 @@ import { ref } from 'vue'
 </script>
 
 <template>
-<div class="searchbox">
-  <div class="header">
-    <span > <img style="width: 50px;height: 50px;margin-bottom: -15px;" src="/imgs/logo.jpg" ></span><span>国家重点研发“合成生物学”专项：微生物天然产物的智能创建与改良</span>
-  </div>
+<div class="searchbox"> 
   <div class="title" >
-    <span class="nav"> <a href="/">首页 &nbsp;</a> > 数据库-2018YFA0901903-菌种库</span>
+    <span class="nav"> <a href="/">首页 &nbsp;</a> > 数据库-2018YFA0901903-化合物库</span>
 
   </div>
-  <a-space direction="vertical" style="width: 100%;">
+  <a-space direction="vertical" style="width: 80%;">
     
     <a-input-search
       v-model:value="value"
-      placeholder="请输入统一菌株编号"
+      placeholder="请输入化合物编号"
       enter-button="Search"
       size="large"
       @search="onSearch"
@@ -85,7 +162,7 @@ import { ref } from 'vue'
   </a-space>
 </div>
 
-  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell"  scroll={ y: true, x: true }>
+  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell"  :scroll="{ x: true}">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'number'">
  <a :href="'/badetail/'+record.id">{{ record.number }}</a>

@@ -66,9 +66,6 @@ axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
 
 <template>
 <div class="searchbox">
-  <div class="header">
-    <span > <img style="width: 50px;height: 50px;margin-bottom: -15px;" src="/imgs/logo.jpg" ></span><span>国家重点研发“合成生物学”专项：微生物天然产物的智能创建与改良</span>
-  </div>
   <div class="title" >
     <span class="nav"> <a href="/">首页&nbsp;</a> > <a href="/bacteria"> &nbsp;数据库-2018YFA0901903-菌种库</a></span>
 
@@ -89,24 +86,12 @@ axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
 
   <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell">
       <template >
-        <!-- <template v-if="column.dataIndex === 'number'">
- <a :href="'/detail/'+record.number">{{ record.number }}</a>
-        </template> -->
       </template>
-      <!-- <template #title>Header</template>
-      <template #footer>Footer</template> -->
     </a-table>
 
 </template>
 
 <style scoped>
-.header{
-    font-size: 30px;
-    font-weight: bold;
-    text-align: left;
-    margin: 10px auto;
-    padding-bottom: 20px;
-}
 .nav{
   display: flex;
   margin-left: 0;

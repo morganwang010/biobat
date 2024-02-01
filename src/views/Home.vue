@@ -37,9 +37,7 @@ const data = [
 
 <template>
 <div class="searchbox">
-  <div class="header">
-    <span > <img style="width: 50px;height: 50px;margin-bottom: -15px;" src="/imgs/logo.jpg" ></span><span>国家重点研发“合成生物学”专项：微生物天然产物的智能创建与改良</span>
-  </div>
+ 
   <div style="background-color: #ececec; padding: 20px">
 
         <a-card title="首席科学家：林双君 教授" :bordered="false" style="width: 100%; text-align: left">

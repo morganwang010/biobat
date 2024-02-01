@@ -2,6 +2,8 @@ import {createRouter, createWebHistory} from "vue-router"
 import BaDetail from '../views/BaDetail.vue'
 import Home from '../views/Home.vue'
 import BaList from '../components/BaList.vue'
+import ComList from '../components/ComList.vue'
+import { Header } from "ant-design-vue/es/layout/layout"
 // import Bainfo from '../views/Bainfo.vue'
 
 const router = createRouter({
@@ -28,7 +30,7 @@ const router = createRouter({
     },
     {
         path: "/com",
-        component: BaList
+        component: ComList
     },
     {
         path: "/ele/:id",

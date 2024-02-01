@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
-
-
-// const count = ref(0)
- 
+import axios from "axios"
   const value = ref<string>('');
-  
   const onSearch = (searchValue: string) => {
     console.log('use value', searchValue);
     console.log('or use this.value', value.value);
   };
- 
-  import axios from "axios"
     const columns = [
     {
       title: '统一菌株编号',
@@ -31,49 +24,26 @@ import { ref } from 'vue'
       title: '菌株中文名称',
       dataIndex: 'namecn',
     },
-    // {
-    //   title: '菌株来源描述',
-    //   dataIndex: 'source',
-    // },
-    // {
-    //   title: '采集地点',
-    //   dataIndex: 'place',
-    // },
-    // {
-    //   title: '保存单位',
-    //   dataIndex: 'org',
-    // },
-    // {
-    //   title: '保存人',
-    //   dataIndex: 'research',
-    // },
-    // {
-    //   title: '登记日期',
-    //   dataIndex: 'sdate',
-    // },
   ];
     const data = ref([])
     axios.get("http://localhost:1105/api/ba").then(res => {
-        // const data = res
-        console.log("fffffffffff")
         console.log(res.data.array)
         data.value = (res.data.array)
       });
- 
-
 </script>
-
 <template>
-<div class="searchbox">
-  <div class="header">
-    <span > <img style="width: 50px;height: 50px;margin-bottom: -15px;" src="/imgs/logo.jpg" ></span><span>国家重点研发“合成生物学”专项：微生物天然产物的智能创建与改良</span>
-  </div>
+<div class="content">
   <div class="title" >
-    <span class="nav"> <a href="/">首页 &nbsp;</a> > 数据库-2018YFA0901903-菌种库</span>
-
+<!-- 
+    <a-breadcrumb>
+    <template #separator><span style="color: red">></span></template>
+    <a-breadcrumb-item href="/"> Home</a-breadcrumb-item>
+    <a-breadcrumb-item   href="/aaa">统一菌株</a-breadcrumb-item>
+  </a-breadcrumb> -->
+    <span class="nav"> <a href="/">首页&nbsp;</a> > <a href="/bacteria"> &nbsp;数据库-2018YFA0901903-菌种库</a></span>
   </div>
-  <a-space direction="vertical" style="width: 100%;">
-    
+  <div class="searchbox">
+    <a-space direction="vertical" style="width: 80%;">
     <a-input-search
       v-model:value="value"
       placeholder="请输入统一菌株编号"
@@ -81,30 +51,19 @@ import { ref } from 'vue'
       size="large"
       @search="onSearch"
     />
-
   </a-space>
+  </div>
 </div>
-
   <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell"  scroll={ y: true, x: true }>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'number'">
  <a :href="'/badetail/'+record.id">{{ record.number }}</a>
         </template>
       </template>
-      <!-- <template #title>Header</template>
-      <template #footer>Footer</template> -->
     </a-table>
 
 </template>
-
 <style scoped>
-.header{
-    font-size: 30px;
-    font-weight: bold;
-    text-align: left;
-    margin: 10px auto;
-    padding-bottom: 20px;
-}
 .nav{
   display: flex;
   margin-left: 0;
@@ -112,7 +71,7 @@ import { ref } from 'vue'
   margin-top: 20px;
 }
 .title{
-  height: 80px;
+  height: 60px;
 }
 .read-the-docs {
   color: #888;
@@ -123,6 +82,11 @@ th.column-money,
   }
   .ant-table-cell {
   white-space: nowrap
+}
+.content{
+  margin: auto;
+  /* margin-bottom: 20px; */
+  width:100%;
 }
 .searchbox{
   margin: auto;
