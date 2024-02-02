@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
- 
+import axios from "axios"
+
 const { params } = useRoute()
 const id = params.id
 console.log(id)
@@ -13,40 +14,52 @@ console.log(id)
     console.log('or use this.value', value.value);
   };
  
-  import axios from "axios"
-    const columns = [
+
+  const columns = [
     {
-      title: '统一菌株编号',
+      title: '基因元件编号',
       dataIndex: 'number',
     },
     {
-      title: '原始代号',
+      title: '基因元件名称',
       className: 'column-money',
-      dataIndex: 'code',
+      dataIndex: 'name',
     },
     {
-      title: '菌株英文名称',
-      dataIndex: 'nameen',
+      title: '元件类别',
+      dataIndex: 'catlog',
     },
     {
-      title: '菌株中文名称',
-      dataIndex: 'namecn',
+      title: '大类',
+      dataIndex: 'class',
     },
     {
-      title: '菌株来源描述',
+      title: '基因来源',
       dataIndex: 'source',
     },
     {
-      title: '采集地点',
-      dataIndex: 'place',
+      title: '来源描述',
+      dataIndex: 'describe',
     },
     {
-      title: '保存单位',
-      dataIndex: 'org',
+      title: '详细信息',
+      dataIndex: 'detail',
     },
     {
-      title: '保存人',
-      dataIndex: 'research',
+      title: '大小（bp）',
+      dataIndex: 'size',
+    },
+    {
+      title: ' 登录号（如有）',
+      dataIndex: 'regno',
+    },
+    {
+      title: '基因元件提供单位',
+      dataIndex: 'researcher',
+    },
+    {
+      title: '序列信息/质粒图谱',
+      dataIndex: 'seqinfo',
     },
     {
       title: '登记日期',
@@ -54,7 +67,7 @@ console.log(id)
     },
   ];
   const data = ref([])
-axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
+axios.get("http://localhost:1105/api/ele/"+id+"").then(res => {
         // const data = res
         console.log("fffffffffff")
         console.log(res.data.array)
@@ -66,15 +79,13 @@ axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
 
 <template>
 <div class="searchbox">
-  <div class="header">
-    <span > <img style="width: 50px;height: 50px;margin-bottom: -15px;" src="/imgs/logo.jpg" ></span><span>国家重点研发“合成生物学”专项：微生物天然产物的智能创建与改良</span>
-  </div>
+
   <div class="title" >
-    <span class="nav"> <a href="/">首页&nbsp;</a> > <a href="/bacteria"> &nbsp;数据库-2018YFA0901903-菌种库</a></span>
+    <span class="nav"> <a href="/">首页&nbsp;</a> > <a href="/ele"> &nbsp;数据库-2018YFA0901903-元件库</a></span>
 
   </div>
 
-  <a-space direction="vertical" style="width: 100%;">
+  <a-space direction="vertical" style="width: 80%;">
     
     <a-input-search
       v-model:value="value"
@@ -87,11 +98,8 @@ axios.get("http://localhost:1105/api/ba/"+id+"").then(res => {
   </a-space>
 </div>
 
-  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell">
+  <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell" :scroll="{x:true}">
       <template >
-        <!-- <template v-if="column.dataIndex === 'number'">
- <a :href="'/detail/'+record.number">{{ record.number }}</a>
-        </template> -->
       </template>
       <!-- <template #title>Header</template>
       <template #footer>Footer</template> -->

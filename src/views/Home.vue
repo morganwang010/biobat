@@ -40,7 +40,7 @@ const data = [
  
   <div style="background-color: #ececec; padding: 20px">
 
-        <a-card title="首席科学家：林双君 教授" :bordered="false" style="width: 100%; text-align: left">
+        <a-card title="首席科学家：林双君 教授" :bordered="false" style="width: 100%; text-align: left; font-size: 1.5em;">
           <p>    参加单位：上海交通大学、中国医学科学院药物研究所、中科院上海有机化学研究所、中科院微生物研究所、中科院南海海洋研究所、中科院天津工业生物技术研究所
 </p>
         </a-card>
@@ -51,8 +51,8 @@ const data = [
 
     </template>
     <template #header>
-      <div class="title"><h3>数据汇交系统：
-</h3></div>
+      <div class="title"><h2>数据汇交系统：
+</h2></div>
     </template>
 
   </a-list>
@@ -73,9 +73,17 @@ const data = [
 .content{
    
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    font-size: 32pt;
 }
 .ant-list-header{
     text-align: left;
+}
+.ant-list-item{
+  font-size: 18px;
+}
+
+.ant-card{
+  font-size: 18px;
 }
 .total{
     float: right;
@@ -96,7 +104,7 @@ const data = [
   margin-top: 20px;
 }
 .title{
-  height: 30px;
+  height: 50px;
   text-align: left;
 }
 .read-the-docs {
@@ -112,6 +120,13 @@ th.column-money,
 .searchbox{
   margin-bottom: 20px;
   width: 100%;
+}
+/* .ant-card-head-title {
+  font-size: 1.5em !important;
+} */
+
+:global(.ant-card-head-title){
+  font-size: 1.5em !important;
 }
 
 </style>

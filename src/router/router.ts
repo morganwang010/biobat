@@ -1,9 +1,12 @@
 import {createRouter, createWebHistory} from "vue-router"
 import BaDetail from '../views/BaDetail.vue'
+import ComDetail from '../views/ComDetail.vue'
+import EleDetail from '../views/EleDetail.vue'
 import Home from '../views/Home.vue'
 import BaList from '../components/BaList.vue'
 import ComList from '../components/ComList.vue'
-import { Header } from "ant-design-vue/es/layout/layout"
+import EleList from '../components/EleList.vue'
+// import { Header } from "ant-design-vue/es/layout/layout"
 // import Bainfo from '../views/Bainfo.vue'
 
 const router = createRouter({
@@ -25,7 +28,7 @@ const router = createRouter({
     },
     {
         path: "/com/:id",
-        component: BaDetail
+        component: ComDetail
         
     },
     {
@@ -34,12 +37,12 @@ const router = createRouter({
     },
     {
         path: "/ele/:id",
-        component: BaDetail
+        component: EleDetail
         
     },
     {
         path: "/ele",
-        component: BaList
+        component: EleList
     },
 ]
 })

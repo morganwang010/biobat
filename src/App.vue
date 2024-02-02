@@ -19,11 +19,11 @@ const contentStyle: CSSProperties = {
   backgroundColor: "#108ee9",
 };
 
-const footerStyle: CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  backgroundColor: "#7dbcea",
-};
+// const footerStyle: CSSProperties = {
+//   textAlign: "center",
+//   color: "#fff",
+//   backgroundColor: "#7dbcea",
+// };
 </script>
 
 <template>

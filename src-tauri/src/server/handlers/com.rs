@@ -4,22 +4,22 @@ use serde::{Deserialize, Serialize};
 
 use crate::info;
 
-#[get("/api/ba/{id}")]
-pub async fn handle_get_ba_with_id( id: web::Path<String>) -> Result<impl Responder> {
+#[get("/api/com/{id}")]
+pub async fn handle_get_com_with_id( id: web::Path<String>) -> Result<impl Responder> {
  
-    let res = info::ba::Ba::get_ba_with_id(id.to_string());
+    let res = info::com::Com::get_com_with_id(id.to_string());
 
     Ok(web::Json(res))
 }
 
-#[get("/api/ba")]
-pub async fn handle_get_ba(query: web::Query<info::ba::BaFilter>) -> Result<impl Responder> {
-    let filter = info::ba::BaFilter {
+#[get("/api/com")]
+pub async fn handle_get_com(query: web::Query<info::com::ComFilter>) -> Result<impl Responder> {
+    let filter = info::com::ComFilter {
         id: query.id.clone(),
         limit: query.limit.clone(),
     };
 
-    let res = info::ba::Ba::get_ba(filter);
+    let res = info::com::Com::get_com(filter);
 
     Ok(web::Json(res))
 }
@@ -35,5 +35,5 @@ pub struct StarParam {
 }
 
 pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg.service(handle_get_ba_with_id).service(handle_get_ba);
+    cfg.service(handle_get_com_with_id).service(handle_get_com);
 }

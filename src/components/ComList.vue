@@ -25,27 +25,31 @@ import axios from "axios"
     },
     {
       title: '来源',
-      dataIndex: 'nameen',
+      dataIndex: 'source',
     },
     {
       title: '结构类型',
-      dataIndex: 'namecn',
+      dataIndex: 'structure',
     },
     {
       title: '分子量',
-      dataIndex: 'namecn',
+      dataIndex: 'mol',
     },
     {
       title: '分子式',
-      dataIndex: 'namecn',
+      dataIndex: 'molfomula',
+    },
+    {
+      title: '化合物量',
+      dataIndex: 'comno',
     },
     {
       title: '生物活性信息',
-      dataIndex: 'namecn',
+      dataIndex: 'info',
     },
     {
       title: '已知/新',
-      dataIndex: 'namecn',
+      dataIndex: 'new',
     },
     {
       title: '化合物鉴定',
@@ -95,7 +99,7 @@ import axios from "axios"
                 dataIndex: 'xray',
                 
               },
-            ],
+            ]
     },
     {
       title: '备注',
@@ -133,7 +137,7 @@ import axios from "axios"
     // },
   ];
     const data = ref([])
-    axios.get("http://localhost:1105/api/ba").then(res => {
+    axios.get("http://localhost:1105/api/com").then(res => {
         // const data = res
         console.log("fffffffffff")
         console.log(res.data.array)
@@ -165,7 +169,7 @@ import axios from "axios"
   <a-table :columns="columns" :data-source="data" bordered class="ant-table-cell"  :scroll="{ x: true}">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'number'">
- <a :href="'/badetail/'+record.id">{{ record.number }}</a>
+ <a :href="'/com/'+record.id">{{ record.number }}</a>
         </template>
       </template>
       <!-- <template #title>Header</template>

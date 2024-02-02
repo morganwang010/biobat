@@ -28,6 +28,8 @@ pub async fn init(app: AppHandle) -> std::io::Result<()> {
       .app_data(tauri_app.clone())
       .wrap(middleware::Logger::default())
       .configure(handlers::ba::config)
+      .configure(handlers::com::config)
+      .configure(handlers::ele::config)
   })
   .bind(("127.0.0.1", 1105))?
   .run()
