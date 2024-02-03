@@ -19,7 +19,7 @@ pub async fn handle_get_ele(query: web::Query<info::ele::EleFilter>) -> Result<i
         limit: query.limit.clone(),
     };
 
-    let res = info::ele::Ele::get_ele(filter);發地方
+    let res = info::ele::Ele::get_ele(filter);
 
     Ok(web::Json(res))
 }
