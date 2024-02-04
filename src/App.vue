@@ -28,6 +28,7 @@ const contentStyle: CSSProperties = {
 
 <template>
   <div class="app">
+
     <a-space direction="vertical" :style="{ width: '100%' }" :size="[0, 48]">
       <a-layout>
         <a-layout-header :style="headerStyle">

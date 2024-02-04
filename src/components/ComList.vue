@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import axios from "axios";
+// import { randomInt } from "crypto";
 
 // const count = ref(0)
 
@@ -111,10 +112,18 @@ const columns = [
 const data = ref([]);
 axios.get("http://localhost:1105/api/com").then((res) => {
   // const data = res
-  console.log("fffffffffff");
-  console.log(res.data.array);
   data.value = res.data.array;
 });
+const open = ref<boolean>(false);
+const imgurl = ref<String>("");
+const showModal = (url: string) => {
+  open.value = true;
+  imgurl.value = url;
+};
+const handleOk = (e: MouseEvent) => {
+  console.log(e);
+  open.value = false;
+};
 </script>
 
 <template>
@@ -146,21 +155,41 @@ axios.get("http://localhost:1105/api/com").then((res) => {
       <template v-if="column.dataIndex === 'number'">
         <a :href="'/com/' + record.id">{{ record.number }}</a>
       </template>
-      <template v-if="column.dataIndex === 'structure1'">
-        <a-image
+      <template v-else-if="column.dataIndex === 'structure1'">
+        <a-image :width="80" :src="'./comimg/' + record.number + '.jpg'" />
+        <!-- <a-image 
+        :preview="{ visible: false }"
+          :width="40"
+          :src="'./comimg/' + record.number + '.jpg'"
+          @click="visible =  true"
+          alt="图片加载失败"
+        /> -->
+
+        <!-- <img
           :preview="{ visible: false }"
-          :width="20"
-          :src="'./com/' + record.number + '.tif'"
-          @click="visible = true"
+          :width="40"
+          :src="'./comimg/' + record.number + '.jpg'"
+          @click="showModal(record.number)"
+          alt="图片加载失败"
         />
+        <a-modal v-model:open="open" title="结构式预览" @ok="handleOk">
+          <img
+            :src="'./comimg/' + imgurl.toString() + '.jpg'"
+            style="width: 250px"
+          />
+        </a-modal> -->
       </template>
     </template>
-    <!-- <template #title>Header</template>
-      <template #footer>Footer</template> -->
   </a-table>
 </template>
 
 <style scoped>
+:global(.ant-image .ant-image-mask) {
+  font-size: 0 !important;
+}
+:global(.anticon-eye) {
+  font-size: 20px !important;
+}
 .header {
   font-size: 30px;
   font-weight: bold;

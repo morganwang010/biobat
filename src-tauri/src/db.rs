@@ -19,7 +19,7 @@ pub fn establish_connection() -> SqliteConnection {
         }
         Err(_) => {
             println!("no BIOINFO_ENV");
-            let database_url = "./lettura.db";
+            let database_url = "./bioinfo.db";
             // let database_url = path::Path::new(&tauri::api::path::home_dir().unwrap())
             //   .join(".BIOINFO")
             //   .join("BIOINFO.db");

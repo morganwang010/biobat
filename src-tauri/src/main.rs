@@ -71,7 +71,7 @@ async fn main() {
 
             let main_window = app.get_window("main").unwrap();
 
-            match env::var("LETTURA_ENV") {
+        match env::var("BIOINFO1_ENV") {
                 Ok(_env) => {
                     // main_window.set_title("Lettura dev").unwrap();
                 }
